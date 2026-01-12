@@ -1,7 +1,15 @@
 # Tutorial_SV
 This is half-a-day training about SV detection using diverse sets of data. 
+We will use a dataset provided by my collaborators and myself (C. Mérot) including short-reads, long-reads and assemblies of the seaweed fly _Coelopa frigida_. This species is interesting for its large polymorphic inversions.
+To ensure efficient computational time, we will work on a dummy genome. I also made dummy labels for the samples to simplify the dataset. 
 
 ## 01 - Using SNPs & local PCA to detect haploblocks putatively representing large rearrangements
+In preparation for this analysis I have selected 22 samples (called A to V) sequenced with illumina short-reads 150 paired-end. 
+On those samples we would like to call genetic variants, starting with SNPs. The distribution of SNP variation and linkage disequilibrium can be very informative to detect putative non-recombining haploblocks, which may be large structural rearrangements like inversions.
+
+To save energy (running it only once) and time), I pre-processed the data for you. I used (fastp https://github.com/OpenGene/fastp) to trim for adaptor and assess quality. Then I used bwa-mem (https://arxiv.org/abs/1303.3997) to align the sequences on the genome, and samtools to sort and index the resulting bam files. I also ran a deduplication module from Picardtools to remove PCR-duplicates (https://github.com/broadinstitute/picard/tree/master/src/main/java/picard/sam/markduplicates). Then I used bcftools mpile up to call SNPs into a vcf file (https://samtools.github.io/bcftools/howtos/variant-calling.html). 
+
+
 
 ## 02 - Comparing assemblies for large rearrangements
 The ideal dataset to confirmlarge rearrangements would be fully-assembled assemblies, although those will rarely be available for non-model species.
@@ -31,8 +39,18 @@ paf.table
 plotMiro(paf.table = paf.table, color.by = "direction")
 ```
 
+Using the paf file and/or the R package, can you extract the breakpoints of the suspected rearrangement? How does it compare to the putative breakpoints identified by indirect PCA methods based on recombination suppression?
 
 ## 03 - Assessing breakpoints and detecting other SVs with long-reads
+We have an additionnal sample (fri59) which comes from our middle group A/B and has been sequenced with Oxford nanopore technology.
+Let's use it to dig into the breakpoints of our large rearrangement, but alos to look for small structural variants all along the genome.
+
+To do so, we will rely on a widely-used software, Sniffles 2 https://github.com/fritzsedlazeck/Sniffles . 
+Be aware that several SV callers are available and, depending on your data, you may favour one over the others or decide on using several tools.
+
+Next, we will try to visualize our SVs to assess how confident we can be in the detection. We suggest to use IGV which may be heavy to use on a large chromosome but will be ok on our dummy genome.
+
+
 
 ## 04 - Using population dataset of short-reads to detect SVs
 
