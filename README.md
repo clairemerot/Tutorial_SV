@@ -9,6 +9,40 @@ On those samples we would like to call genetic variants, starting with SNPs. The
 
 To save energy (running it only once) and time), I pre-processed the data for you. I used (fastp https://github.com/OpenGene/fastp) to trim for adaptor and assess quality. Then I used bwa-mem (https://arxiv.org/abs/1303.3997) to align the sequences on the genome, and samtools to sort and index the resulting bam files. I also ran a deduplication module from Picardtools to remove PCR-duplicates (https://github.com/broadinstitute/picard/tree/master/src/main/java/picard/sam/markduplicates). Then I used bcftools mpile up to call SNPs into a vcf file (https://samtools.github.io/bcftools/howtos/variant-calling.html). 
 
+First, we will use a R package called lostruct (https://github.com/petrelharp/local_pca) which perform local PCA along the genome and groups together (using a MDS - multidimensional scaling analysis) the windows that look alike each other. To fully understand the idea of the method you may want to read the paper.
+Local PCA Shows How the Effect of Population Structure Differs Along the Genome, Han Li and Peter Ralph, Genetics January 1, 2019 vol. 211 no. 1 289-304.
+
+If you want to run yourself all the initial steps to go from the vcf of SNPs to the matrix of PCA-by-windows, you can follow the detailled tutorial here [insert link].
+If you are short in time, I recommend that you use the pcamatrix that I made for you here: [insert path]
+
+On R studio:
+```
+library(lostruct)
+#lostruct code
+```
+
+What do you think? Do we have a region where we could suspect non-recombining blocks revealing a putative inversion?
+How could we do to genotype our individuals for this putative variant?
+
+
+A recent tool was published which offers a better visualisation of PC scores along the genome. This is called Winpca - https://github.com/MoritzBlumer/winpca.
+We will play a little with this package to explore our dataset.
+
+In a terminal:
+```
+#winpca code
+```
+
+
+Using either information from lostruct or winpca, may you identify approximative coordinates for the suspected rearrangement?
+
+A step further... 
+It may be interesting to run population genetics classic analysis to better capture the variation within and across the putative inversion.
+For example, you may be interested in calculating LD across distant windows. You may also want to calculate FST statistics between homokaryotypic groups or pi diversity within each group. If you have time you can return to this point and re-apply the methods you learnt over the last few days to the groups determined by the inversion.
+Some examples of code here: [insert link]
+
+
+
 
 
 ## 02 - Comparing assemblies for large rearrangements
