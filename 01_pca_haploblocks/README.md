@@ -57,18 +57,21 @@ colnames(mds_matrix)<-c("chrom","start","end","mds1","mds2","mds3","mds4","mds5"
 #we will also add a column with the mid position of each window
 mds_matrix$midpos<-(mds_matrix$start+mds_matrix$end)/2
 
-
-
 ggplot(mds_matrix, aes(x=mds1, y=mds2, colour=chrom))+
   geom_point()+
   theme_classic()
+```
+A group of windows seems to cluster at high values on mds1. Let's see whether those windows are alos in the same area of our genome by plotting the mds1 scores along the chromosome:
 
+```
 ggplot(mds_matrix, aes(x=midpos, y=mds1, colour=chrom))+
   geom_point()+
   theme_classic()
 ```
 What do you think? Do we have a region where we could suspect non-recombining blocks revealing a putative inversion?
 How could we do to genotype our individuals for this putative variant?
+
+NB: Here we live in a simplified world... Most of the time, if you run the lostruct analysis on all the genome or on each chromosome it may be worth exploring mds2, mds3, etc. It may also be relevant to decide a threshold on mds score (for exemple 3 times the standard deviation) beyond which windows will be considered outliers and will then receive further attention.
 
 #### Exploring PCAs themselves
 We may want to simply plot the pca for some windows. This is not the most easy because remember the format is a bit tricky
@@ -99,23 +102,72 @@ plot(pc1_i, pc2_i, pch=20, xlab=paste("PC1", var1 , "%"), ylab=paste("PC2", var2
 ```
 You may try to visualise a PCA within and outside your region of interest. What do you think?
 
+In the folder 00_ressources you will find a file classifying the samples as AA, AB and BB. Those could be imagined as populations or groups with different versions of a rearrangements. I extracted this information from a PCA in our region of interest and confirmed it with a PCR marker. Does it correspond to the groups you observe?
+
 ### WinPCA - visualising PC1 along the genome.
 
 A recent tool was published which offers a better visualisation of PC scores along the genome. This is called Winpca - https://github.com/MoritzBlumer/winpca.
-We will play a little with this package to explore our dataset.
+We will play a little with this package to explore our dataset. The principle is to perform pca on windows along the genome (here defined by a fixed size (while before we defined them based on the number of SNPs). Then, the 1st of the 2nd PCs are plotted along the chromosome. Each line is a sample and this line connects its coordinate on PC1 of all the windows. Of course, PCs can also be flipped to improve visualisation.
 
-In a terminal:
+Here we pick windows of 10000bp incremented by 10000bp. We will use genotypes (GT) for biallelic SNPs encoded in the vcf. Note that if you are processing low-depth data with angsd winpca can also use GL and pcangsd.
+
+To run winpca in the terminal
 ```
+#filter for biallelic SNPs - otherwise we run into an error:
+bcftools view -m2 -M2 -v snps ~/workshop_materials/structural_variants/SNPs/SNPs.vcf > 01_pca_haploblocks/SNPs_biallelic.vcf
+
 #winpca code
-```
+#make the PCAs
+#-w for window size -i for increment size --np to remove filters creating an error -v GT to precise the type of data.
+#then there are three argument "$PREFIX" "$VCF" "$REGION"
+~/winpca/winpca pca -w 10000 -i 10000 --np -v GT 01_pca_haploblocks/winpca_out 01_pca_haploblocks/SNPs_biallelic.vcf Chr1:1-9999999
 
+#polarize them
+~/winpca/winpca polarize winpca_out
+
+#plot PCs
+ ~/winpca/winpca chromplot winpca_out Chr1:1-9999999
+```
+Winpca outputs a .html file in which you can directly visualise PC1 along the chromosome (below) and the proportion of variance capture by pc1.
+
+You may want to do your own plots. To do so, we can unzip the .tsv.gz files formed using the command 
+```gunzip 01_pca_haploblocks/*.tsv.gz```
+
+Then we can go in Rstudio for some reformatting and plotting. We will re-color the plot based on haplogroups determined in our previous PCAs.
+
+```
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+#read pc1 scores
+winpca_scores<- read.delim("01_pca_haploblocks/winpca_out.pc_1.tsv")
+head(winpca_scores)
+
+#read stats
+stat_pca<-read.delim("01_pca_haploblocks/winpca_out.stat.tsv")
+head(stat_pca)
+
+#read information about the samples 
+info<-read.delim("00_ressources/info_ind.txt")
+head(info)
+
+#let's reformat the data as tidy data and add some information about the samples
+winpca_scores_long<-pivot_longer(winpca_scores, cols=A:V)
+head(winpca_scores_long)
+winpca_scores_long_info<-left_join(winpca_scores_long,info)
+
+head(winpca_scores_long_info)
+ggplot(data=winpca_scores_long_info, mapping=aes(x=pos, y=value, group=name, col=factor(haplogroup)))+ geom_line()+ theme_classic()
+
+```
 
 Using either information from lostruct or winpca, may you identify approximative coordinates for the suspected rearrangement?
 
 
 ### A step further... 
 It may be interesting to run population genetics classic analysis to better capture the variation within and across the putative inversion.
-For example, you may be interested in calculating LD across distant windows. You may also want to calculate FST statistics between homokaryotypic groups or pi diversity within each group. If you have time you can return to this point and re-apply the methods you learnt over the last few days to the groups determined by the inversion.
+
+ It may be relevant to calculate LD across distant windows. You may want to calculate FST statistics between homokaryotypic groups or pi diversity within each group. If you have time you can return to this point and re-apply the methods you learnt over the last few days using the vcf and treating as populations the haplogroups determined by the inversion (either by yourself based on the pc scores or kmeans approaches, or using the info_ind.txt file provided in 00_resssources).
 
 
 
