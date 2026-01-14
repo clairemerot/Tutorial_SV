@@ -37,8 +37,6 @@ We can now run the PCA on all windows. Here we choose to consider k=npc=2 becaus
 pcs <- eigen_windows(snps,k=2)
 dim(pcs) #check dimension
 head (pcs[,1:10]) #look at the first 10 columns
-pcs_noNA<-pcs[-which(is.na(pcs[,1])),] #because of NA, some windows may not computed by pca. we could remove them
-dim(pcs_noNA) #see how many are NA - here 0 - we are lucky
 ```
 In the matrix pcs, each rows give the first k eigenvalues and k eigenvectors for each window. This gives you a matrix with 47 columns (3 columns of info, 22 columns with PC1 score for each individual, and 22 column with PC2 score for each individual). It has as many rows as windows (463 with windows of 1000 SNPs)
 
@@ -47,13 +45,19 @@ As you see we don't know the position of each window, we will get it with the fu
 #retrieve positions
 window_pos<-region(snps)()
 head(window_pos)
-
-#keep windows without NA
-window_pos_noNA<- window_pos[-which(is.na(pcs[,1])),]
 #merge
+pca_matrix<-cbind(window_pos, pcs)
+head (pca_matrix[,1:10])
+#save the file
+write.table(pca_matrix, "01_pca_haploblocks/pca_matrix.txt", sep="\t", row.names=FALSE, quote=FALSE)
+
+#keep windows without NA: because of msising data in the vcf, some windows may not computed by pca (particularly true when doing small window with 100SNPs).
+In our example we don't need it but here is how to remove them. 
+pcs_noNA<-pcs[-which(is.na(pcs[,1])),]
+dim(pcs_noNA) # if the dimension is > 0, one should remove the NA -lines # in our case we don't need
+window_pos_noNA<- window_pos[-which(is.na(pcs[,1])),]
 pca_matrix_noNA<-cbind(window_pos_noNA, pcs_noNA)
 head (pca_matrix_noNA[,1:10])
-
 #save the file
-write.table(pca_matrix_noNA, "01_pca_haploblocks/pca_matrix.txt", sep="\t", row.names=FALSE, quote=FALSE)
+write.table(pca_matrix_noNA, "01_pca_haploblocks/pca_matrix_noNA.txt", sep="\t", row.names=FALSE, quote=FALSE)
 ```
