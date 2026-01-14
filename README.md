@@ -4,23 +4,49 @@ We will use a dataset provided by my collaborators and myself (C. Mérot) includ
 To ensure efficient computational time, we will work on a dummy genome. I also made dummy labels for the samples to simplify the dataset. 
 
 ## 01 - Using SNPs & local PCA to detect haploblocks putatively representing large rearrangements
+# Data and pre-processing
 In preparation for this analysis I have selected 22 samples (called A to V) sequenced with illumina short-reads 150 paired-end. 
 On those samples we would like to call genetic variants, starting with SNPs. The distribution of SNP variation and linkage disequilibrium can be very informative to detect putative non-recombining haploblocks, which may be large structural rearrangements like inversions.
 
 To save energy (running it only once) and time), I pre-processed the data for you. I used (fastp https://github.com/OpenGene/fastp) to trim for adaptor and assess quality. Then I used bwa-mem (https://arxiv.org/abs/1303.3997) to align the sequences on the genome, and samtools to sort and index the resulting bam files. I also ran a deduplication module from Picardtools to remove PCR-duplicates (https://github.com/broadinstitute/picard/tree/master/src/main/java/picard/sam/markduplicates). Then I used bcftools mpile up to call SNPs into a vcf file (https://samtools.github.io/bcftools/howtos/variant-calling.html). 
 
+#Local PCAs with lostruct
 First, we will use a R package called lostruct (https://github.com/petrelharp/local_pca) which perform local PCA along the genome and groups together (using a MDS - multidimensional scaling analysis) the windows that look alike each other. To fully understand the idea of the method you may want to read the paper.
 Local PCA Shows How the Effect of Population Structure Differs Along the Genome, Han Li and Peter Ralph, Genetics January 1, 2019 vol. 211 no. 1 289-304.
 
-If you want to run yourself all the initial steps to go from the vcf of SNPs to the matrix of PCA-by-windows, you can follow the detailled tutorial here [insert link].
-If you are short in time, I recommend that you use the pcamatrix that I made for you here: [insert path]
+If you want to run yourself all the initial steps to go from the vcf of SNPs to the matrix of PCA-by-windows, you can follow the detailled tutorial here [insert link]. If you are short in time, I recommend that you use the pcamatrix that I made for you here: [insert path]
 
-On R studio:
+Briefly, we do several steps to convert into a bcf. Then we use a function in lostruct to make windows of your chosen size. We suggest to use window of 1000 snps. Typically with whole genome you may first run by windows of 5000 snps (or more) for a first look, and then refine with smaller windows. The analysis can be run chromosome by chromosome (as in the paper) or on the entire genome. Here, we have just one scaffold. Then, lostruct run the PCA on all windows. Here we choose to consider k=npc=2 because they usually capture most variance for each local PCA
+
+It outputs a matrix pcs in which each row give the first k eigenvalues and k eigenvectors for each window. This gives you a matrix with 47 columns (3 columns of info, 22 columns with PC1 score for each individual, and 22 column with PC2 score for each individual). It has as many rows as windows. I added 3 columns of information about the window position. 
+
+In a terminal, you can have a look at the matrix with
+```
+less
+```
+(use "q" to exit less visualisation in a terminal)
+
+Back to work, we will run the end of lostruct procedure. you can do it either on the terminal or in Rstudio on your computer
 ```
 library(lostruct)
-#lostruct code
+#load matrix
+pca_matrix_noNA<-read.table("pca_matrix.txt", sep="\t", header=T, stringsAsFactors=FALSE)
+head(pca_matrix_noNA)
+#split columns with positions information and PC
+window_pos_noNA<-pca_matrix_noNA[,1:3]
+pcs_noNA<-as.matrix(pca_matrix_noNA[,4:dim(pca_matrix_noNA)[2]])
 ```
+The lostruct procedure proposes to compute pairwise distances between those windows and visualise it with a MDS (multidimensional scaling). Our goal is to identify groups of windows which display similar PCA pattern.This is done with the following functions (we uses 2 PC per window as above, and will look at the 1st 10 axes of the MDS)
 
+```
+pcdist <- pc_dist(pcs_noNA,npc=2)
+mds_axe<-cmdscale(pcdist, k=10)
+head(mds_axe)
+
+#again the mds file is missing position information so:
+mds_matrix<-cbind(window_pos_noNA, mds_axe)
+write.table(mds_matrix, "mds_matrix.txt", sep="\t", row.names=FALSE, quote=FALSE)
+```
 What do you think? Do we have a region where we could suspect non-recombining blocks revealing a putative inversion?
 How could we do to genotype our individuals for this putative variant?
 
