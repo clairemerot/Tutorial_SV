@@ -14,7 +14,7 @@ They have been used in empircial studies such as:
 Huang K, Andrew RL, Owens GL, Ostevik KL, Rieseberg LH. Multiple chromosomal inversions contribute to adaptive divergence of a dune sunflower ecotype. Mol Ecol. 2020; 29: 2535–2549. https://doi.org/10.1111/mec.15428
 Mérot, C., Berdan, E. L., Cayuela, H., Djambazian, H., Ferchaud, A. L., Laporte, M., ... & Bernatchez, L. (2021). Locally adaptive inversions modulate genetic variation at different geographic scales in a seaweed fly. Molecular biology and evolution, 38(9), 3953-3971.
 
-To get an overview of the kind of approach you may visualise it here: 00_ressources/images/merot_huang.jpg
+To get an overview of the kind of approach you may visualise it [here](https://github.com/clairemerot/Tutorial_SV/blob/main/00_ressources/images/merot_huang.jpg)
 
 ## 02 - Comparing assemblies for large rearrangements
 
