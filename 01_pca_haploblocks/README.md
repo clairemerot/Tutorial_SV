@@ -8,22 +8,21 @@ To save energy (running it only once) and time), I pre-processed the data for yo
 ### Local PCAs with lostruct
 #### pre-process
 First, we will use a R package called lostruct (https://github.com/petrelharp/local_pca) which perform local PCA along the genome and groups together (using a MDS - multidimensional scaling analysis) the windows that look alike each other. To fully understand the idea of the method you may want to read the paper.
-Local PCA Shows How the Effect of Population Structure Differs Along the Genome, Han Li and Peter Ralph, Genetics January 1, 2019 vol. 211 no. 1 289-304.
 
-If you want to run yourself all the initial steps to go from the vcf of SNPs to the matrix of PCA-by-windows, you can follow the detailled tutorial here [insert link]. If you are short in time, I recommend that you use the pcamatrix that I made for you here: [insert path]
+Local PCA Shows How the Effect of Population Structure Differs Along the Genome, Han Li and Peter Ralph, Genetics January 1, 2019 vol. 211 no. 1 289-304.https://doi.org/10.1534/genetics.118.301747
+
+If you want to run yourself all the initial steps to go from the vcf of SNPs to the matrix of PCA-by-windows, you can follow the detailled tutorial [here](https://github.com/clairemerot/Tutorial_SV/blob/main/01_pca_haploblocks/preprocess.md). If you are short in time, I recommend that you use the pcamatrix that I made for you. In a terminal, you can have a look at the matrix with
+```
+less ~/workshop_materials/structural_variants/SNPs/pca_matrix.txt
+```
+(use "q" to exit less visualisation in a terminal)
 
 Briefly, we do several steps to convert into a bcf. Then we use a function in lostruct to make windows of your chosen size. We suggest to use window of 1000 snps. Typically with whole genome you may first run by windows of 5000 snps (or more) for a first look, and then refine with smaller windows. The analysis can be run chromosome by chromosome (as in the paper) or on the entire genome. Here, we have just one scaffold. Then, lostruct run the PCA on all windows. Here we choose to consider k=npc=2 because they usually capture most variance for each local PCA
 
 It outputs a matrix pcs in which each row give the first k eigenvalues and k eigenvectors for each window. This gives you a matrix with 47 columns (3 columns of info, 22 columns with PC1 score for each individual, and 22 column with PC2 score for each individual). It has as many rows as windows. I added 3 columns of information about the window position. 
 
 #### analysis
-In a terminal, you can have a look at the matrix with
-```
-less ~/workshop_materials/structural_variants/SNPs/pca_matrix.txt
-```
-(use "q" to exit less visualisation in a terminal)
-
-Back to work, we will run the end of lostruct procedure. you can do it either on the terminal or in Rstudio on your computer
+You will run the end of lostruct procedure. you can do it either on the terminal or in Rstudio on your computer
 ```
 library(lostruct)
 #load matrix
