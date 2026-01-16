@@ -8,9 +8,9 @@ To do so, we will rely on a widely-used software, Sniffles 2 https://github.com/
 
 Be aware that several SV callers are available and, depending on your data, you may favour one over the others or decide on using several tools.
 ```
-sniffles -i ~/workshop_materials/structural_variants/ONT/indA59.bam --reference ~/workshop_materials/structural_variants/assemblies/ref.fasta  --vcf 03_LR/fri59.vcf –minsupport 10
+sniffles -i ~/workshop_materials/structural_variants/ONT/indA59.bam --reference ~/workshop_materials/structural_variants/assemblies/ref.fasta --minsupport 10 --vcf 03_LR/fri59.vcf
 ```
-You can open the vcf and explore it. What are the different pieces of information available? How does it differ from a vcf of SNPs? What kind of filters or classifications may you want to implement for subsequent analysis?
+You can open the vcf and explore it. What are the different pieces of information available for each variant? How does it differ from a vcf of SNPs? What kind of filters or classifications may you want to implement for subsequent analysis?
 
 ### Visualise SVs and validate breakpoints 
 
