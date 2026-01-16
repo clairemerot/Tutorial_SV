@@ -1,4 +1,5 @@
 ## 01 - Using SNPs & local PCA to detect haploblocks putatively representing large rearrangements
+
 ### Data and pre-processing
 In preparation for this analysis I have selected 22 samples (called A to V) sequenced with illumina short-reads 150 paired-end. 
 On those samples we would like to call genetic variants, starting with SNPs. The distribution of SNP variation and linkage disequilibrium can be very informative to detect putative non-recombining haploblocks, which may be large structural rearrangements like inversions.
@@ -166,8 +167,12 @@ Using either information from lostruct or winpca, may you identify approximative
 ### A step further... 
 It may be interesting to run population genetics classic analysis to better capture the variation within and across the putative inversion.
 
- It may be relevant to calculate LD across distant windows. You may want to calculate FST statistics between homokaryotypic groups or pi diversity within each group. If you have time you can return to this point and re-apply the methods you learnt over the last few days using the vcf and treating as populations the haplogroups determined by the inversion (either by yourself based on the pc scores or kmeans approaches, or using the info_ind.txt file provided in 00_resssources).
+It may be relevant to calculate LD across distant windows. You may want to calculate FST statistics between homokaryotypic groups or pi diversity within each group. If you have time you can return to this point and re-apply the methods you learnt over the last few days using the vcf and treating as populations the haplogroups determined by the inversion (either by yourself based on the pc scores or kmeans approaches, or using the info_ind.txt file provided in 00_resssources).
 
+You can find this approach of localPCAs used in several recent papers. Here are a few that I know:
+Huang K, Andrew RL, Owens GL, Ostevik KL, Rieseberg LH. Multiple chromosomal inversions contribute to adaptive divergence of a dune sunflower ecotype. Mol Ecol. 2020; 29: 2535–2549. https://doi.org/10.1111/mec.15428
+Mérot, C., Berdan, E. L., Cayuela, H., Djambazian, H., Ferchaud, A. L., Laporte, M., ... & Bernatchez, L. (2021). Locally adaptive inversions modulate genetic variation at different geographic scales in a seaweed fly. Molecular biology and evolution, 38(9), 3953-3971.
 
+To get an overview of the kind of approach you may also visualise this summary [here](https://github.com/clairemerot/Tutorial_SV/blob/main/00_ressources/images/merot_huang.jpg)
 
 
