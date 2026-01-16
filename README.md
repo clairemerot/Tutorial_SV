@@ -1,9 +1,9 @@
 # Tutorial_SV
 This is half-a-day training about SV detection using diverse sets of data. 
 We will use a dataset provided by my collaborators and myself (C. Mérot) including short-reads, long-reads and assemblies of the seaweed fly _Coelopa frigida_. This species is interesting for its large polymorphic inversions.
-To ensure efficient computational time, we will work on a dummy genome. I also made dummy labels for the samples to simplify the dataset. 
+To ensure efficient computational time, we will work on a dummy genome  of 10Mb. I also made dummy labels for the samples to simplify the dataset. 
 
-To make our lives easire, I suggest that you clone this whole repository in your working directory so taht we all use the same file/folder architecture. 
+To make our lives easier, I suggest that you clone this whole repository in your working directory so taht we all use the same file/folder architecture. 
 Very important ** all commands are written to be run from the Tutorial_SV folder (and not from each subfolder)**. 
 
 ```git clone https://github.com/clairemerot/Tutorial_SV ```
@@ -16,14 +16,9 @@ Methods comes from those papers:
 Local PCA Shows How the Effect of Population Structure Differs Along the Genome, Han Li and Peter Ralph, Genetics January 1, 2019 vol. 211 no. 1 289-304. https://doi.org/10.1534/genetics.118.301747
 L Moritz Blumer, Jeffrey M Good, Richard Durbin, WinPCA: a package for windowed principal component analysis, Bioinformatics, Volume 41, Issue 10, October 2025, btaf529, https://doi.org/10.1093/bioinformatics/btaf529
 
-They have been used in empircial studies such as:
-Huang K, Andrew RL, Owens GL, Ostevik KL, Rieseberg LH. Multiple chromosomal inversions contribute to adaptive divergence of a dune sunflower ecotype. Mol Ecol. 2020; 29: 2535–2549. https://doi.org/10.1111/mec.15428
-Mérot, C., Berdan, E. L., Cayuela, H., Djambazian, H., Ferchaud, A. L., Laporte, M., ... & Bernatchez, L. (2021). Locally adaptive inversions modulate genetic variation at different geographic scales in a seaweed fly. Molecular biology and evolution, 38(9), 3953-3971.
-
-To get an overview of the kind of approach you may visualise it [here](https://github.com/clairemerot/Tutorial_SV/blob/main/00_ressources/images/merot_huang.jpg)
 
 ## 02 - Comparing assemblies for large rearrangements
-
+Next, we have a second fully-assembled genome. Obviously this 
 Tutorial [here](https://github.com/clairemerot/Tutorial_SV/blob/main/02_assemblies/README.md)
 ## 03 - Assessing breakpoints and detecting other SVs with long-reads
 
