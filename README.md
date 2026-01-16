@@ -16,10 +16,16 @@ Methods comes from those papers:
 Local PCA Shows How the Effect of Population Structure Differs Along the Genome, Han Li and Peter Ralph, Genetics January 1, 2019 vol. 211 no. 1 289-304. https://doi.org/10.1534/genetics.118.301747
 L Moritz Blumer, Jeffrey M Good, Richard Durbin, WinPCA: a package for windowed principal component analysis, Bioinformatics, Volume 41, Issue 10, October 2025, btaf529, https://doi.org/10.1093/bioinformatics/btaf529
 
-
 ## 02 - Comparing assemblies for large rearrangements
-Next, we have a second fully-assembled genome. Obviously this 
-Tutorial [here](https://github.com/clairemerot/Tutorial_SV/blob/main/02_assemblies/README.md)
+Next, we have a second fully-assembled genome. Obviously, this makes a perfect dataset to detect all types of variants, including very long ones (but beware of assembly errors!). We will use this comparison to confirm the putative rearrangement that we suspected during the localPCA analysis.
+We will do easy plotting of genome synteny with dotplots using a stan web application called D-Genies.
+Cabanettes F, Klopp C. 2018. D-GENIES: dot plot large genomes in an interactive, efficient and simple way. PeerJ 6:e4958 https://doi.org/10.7717/peerj.4958
+
+Next, we will obtain nice ribbon plots with the R package SVbyEye .
+David Porubsky, Xavi Guitart, DongAhn Yoo, Philip C Dishuck, William T Harvey, Evan E Eichler, SVbyEye: a visual tool to characterize structural variation among whole-genome assemblies, Bioinformatics, Volume 41, Issue 6, June 2025, btaf332, https://doi.org/10.1093/bioinformatics/btaf332
+
+Here is the tutorial [here](https://github.com/clairemerot/Tutorial_SV/blob/main/02_assemblies/README.md)
+
 ## 03 - Assessing breakpoints and detecting other SVs with long-reads
 
 tutorial [here](https://github.com/clairemerot/Tutorial_SV/blob/main/03_LR/README.md)
