@@ -120,20 +120,21 @@ bcftools view -m2 -M2 -v snps ~/workshop_materials/structural_variants/SNPs/SNPs
 #make the PCAs
 #-w for window size -i for increment size --np to remove filters creating an error -v GT to precise the type of data.
 #then there are three argument "$PREFIX" "$VCF" "$REGION"
-~/winpca/winpca pca -w 10000 -i 10000 --np -v GT 01_pca_haploblocks/winpca_out 01_pca_haploblocks/SNPs_biallelic.vcf Chr1:1-9999999
+winpca pca -w 10000 -i 10000 --np -v GT 01_pca_haploblocks/winpca_out 01_pca_haploblocks/SNPs_biallelic.vcf Chr1:1-9999999
 
 #polarize them
-~/winpca/winpca polarize winpca_out
+winpca polarize winpca_out
 
 #plot PCs
- ~/winpca/winpca chromplot winpca_out Chr1:1-9999999
+winpca chromplot winpca_out Chr1:1-9999999
 ```
 Winpca outputs a .html file in which you can directly visualise PC1 along the chromosome (below) and the proportion of variance capture by pc1.
 
 You may want to do your own plots. To do so, we can unzip the .tsv.gz files formed using the command 
 ```gunzip 01_pca_haploblocks/*.tsv.gz```
 
-Then we can go in Rstudio for some reformatting and plotting. We will re-color the plot based on haplogroups determined in our previous PCAs.
+Then we can go in Rstudio for some reformatting and plotting. We will use libraries which help making "tidy data" such as tidyr and dplyr, as well as ggplot2 as before for plotting.
+We will re-color the plot based on haplogroups determined in our previous PCAs.
 
 ```
 library(ggplot2)
