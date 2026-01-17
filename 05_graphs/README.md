@@ -4,8 +4,8 @@ In this folder we will explore graphs for SV
 ### Build a graph including variants
 
 ```
-ref= ~/workshop_materials/structural_variants/assemblies/ref.fasta
-vcf_file=~/workshop_materials/structural_variants/ONT/fri59_pass.vcf
+ref=~/workshop_materials/structural_variants/assemblies/ref.fasta
+vcf_file=~/workshop_materials/structural_variants/ONT/fri59_filtered.vcf
 prefix=05_graphs/variantgraph
 
 vg autoindex --workflow giraffe -r $ref -v $vcf_file -p $prefix
