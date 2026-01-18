@@ -16,11 +16,14 @@ Let's run Delly on one sample first (sample B). We will use the following option
 -o the output file -g the reference genome -q 20 to keep alignement above a minimum quality of 20
 
 ```
+output=04_SR/B_SVSR.bcf
+ref=~/workshop_materials/structural_variants/assemblies/ref.fasta
+bam=~/workshop_materials/structural_variants/SR/B.bam
+
 delly call -t ALL \
--o 04_SR/B_SVSR.bcf \
--g  ~/workshop_materials/structural_variants/assemblies/ref.fasta \
--q 20 \
-~/workshop_materials/structural_variants/SR/B.bam 
+-o $output \
+-g $ref \
+-q 20 $bam 
 
 #next lets convert the bcf to vcf
 bcftools view 04_SR/B_SVSR.bcf > 04_SR/B_SVSR.vcf
@@ -29,14 +32,17 @@ echo "nb of SV detected by Delly"
 grep -v ^\#\# 04_SR/B_SVSR.vcf | wc -l
 ```
 
-### Galling on more samples | Visualising SVs
+### Calling on more samples | Visualising SVs
 It is also possible to do all the samples at once - but slightly longer. Below is the code for several bam files. Since it is long, you may want to have a coffee break or play with the vcf of sample B in the mean time (see next section).
 
 ### warning - slightly long to run
 ```
+output=04_SR/all_SVSR.bcf
+ref=~/workshop_materials/structural_variants/assemblies/ref.fasta
+
 delly call -t ALL \
--o 04_SR/all_SVSR.bcf \
--g  ~/workshop_materials/structural_variants/assemblies/ref.fasta \
+-o $output \
+-g $ref \
 -q 20 \
 ~/workshop_materials/structural_variants/SR/A.bam \
 ~/workshop_materials/structural_variants/SR/B.bam \
@@ -79,9 +85,11 @@ Delly can also be used to re-genotype all the samples wiht the objective to obta
 The command is nearly identical, except that we gie it the vcf.
 
 ```
+ref=~/workshop_materials/structural_variants/assemblies/ref.fasta
+
 delly call -t ALL \
--o 04_SR/all_SVSR.bcf \
--g  ~/workshop_materials/structural_variants/assemblies/ref.fasta \
+-o 04_SR/all_SVSR_regenotyped.bcf \
+-g  $ref \
 -q 20 -v 04_SR/all_SVSR.vcf \
 ~/workshop_materials/structural_variants/SR/A.bam \
 ~/workshop_materials/structural_variants/SR/B.bam \
@@ -96,7 +104,9 @@ grep -v ^\#\# 04_SR/all_SVSR_regenotyped.vcf | wc -l
 ```
 
 -> How many SVs are you analysing in total?
+
 -> Do you notice less mising data? 
+
 -> Do you notice some variants in which the genotype is different?
 
 
