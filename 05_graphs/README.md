@@ -1,5 +1,7 @@
 In this folder we will explore graphs for SV
-
+https://github.com/TF-Chan-Lab/panGraphViewer
+https://github.com/vgteam/sequenceTubeMap
+https://github.com/ComparativeGenomicsToolkit/cactus/blob/master/doc/pangenome.md
 
 ### Build a graph including variants
 
