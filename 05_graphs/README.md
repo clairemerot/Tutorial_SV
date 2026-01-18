@@ -22,5 +22,8 @@ output=05_graphs/A_mapped.gam
 vg giraffe -Z 05_graphs/variantgraph.giraffe.gbz -m 05_graphs/variantgraph.shortread.withzip.min -d 05_graphs/variantgraph.dist -f $fq1 -f $fq2 > $output
 
 vg pack -Q 5 -x 05_graphs/variantgraph.giraffe.gbz -g 05_graphs/A_mapped.gam -o 05_graphs/A_mapped.gam.pack
+
+ vg snarls 05_graphs/variantgraph.giraffe.gbz > 05_graphs/variantgraph.snarls
+vg call -a -k 05_graphs/A_mapped.gam.pack -r 05_graphs/variantgraph.snarls -f $ref 05_graphs/variantgraph.giraffe.gbz >05_graphs/A.vcf
 ```
 
