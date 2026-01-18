@@ -66,8 +66,39 @@ Like we did for the SVs detected from long-reads we can also open IGV in the des
 
 When the vcf for the 4 samples is ready, open also the all_SVSR.vcf. You can now notice 4 columns corresponding to genotypes and other informations about each sample. 
 -> What do you think? Have you noticed missing data?
+-> Can you estimate the fraction of missing data?
+
+
+***TO FIX!***
+WARNING: bcftools version mismatch .. bcftools at 1.21, the plugin "fill-tags" at 1.10.2
+g
 
 ### Re-genotyping
+Delly can also be used to re-genotype all the samples wiht the objective to obtain the most accurate genotype for all samples and for all SVs. For example, one can imagine that a given SV was only called in two samples with high-confidence (maybe because they are alternate homozygotes)... Now by regenotyping, we can ask what is the genotype in the other two samples for which it wasn't called (for exemple due to a lower coverage if it was heterozygote or less deeply sequenced).
+
+The command is nearly identical, except that we gie it the vcf.
+
+```
+delly call -t ALL \
+-o 04_SR/all_SVSR.bcf \
+-g  ~/workshop_materials/structural_variants/assemblies/ref.fasta \
+-q 20 -v 04_SR/all_SVSR.vcf \
+~/workshop_materials/structural_variants/SR/A.bam \
+~/workshop_materials/structural_variants/SR/B.bam \
+~/workshop_materials/structural_variants/SR/C.bam \
+~/workshop_materials/structural_variants/SR/D.bam 
+
+#next lets convert the bcf to vcf
+bcftools view 04_SR/all_SVSR.bcf > 04_SR/all_SVSR_regenotyped.vcf
+
+echo "nb of SV detected by Delly"
+grep -v ^\#\# 04_SR/all_SVSR_regenotyped.vcf | wc -l
+```
+
+-> How many SVs are you analysing in total?
+-> Do you notice less mising data? 
+-> Do you notice some variants in which the genotype is different?
+
 
 
 
