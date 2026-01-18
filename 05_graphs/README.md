@@ -17,6 +17,10 @@ vg autoindex --workflow giraffe -r $ref -v $vcf_file -p $prefix
 ```
 fq1=~/workshop_materials/structural_variants/SR/A_R1.fastq
 fq2=~/workshop_materials/structural_variants/SR/A_R2.fastq
+output=05_graphs/A_mapped.gam
 
-vg giraffe -Z 05_graphs/variantgraph.giraffe.gbz -m 05_graphs/variantgraph.shortread.withzip.min -d 05_graphs/variantgraph.dist -f $fq1 -f $fq2 > 05_graphs/A_mapped.gam
+vg giraffe -Z 05_graphs/variantgraph.giraffe.gbz -m 05_graphs/variantgraph.shortread.withzip.min -d 05_graphs/variantgraph.dist -f $fq1 -f $fq2 > $output
+
+vg pack -Q 5 -x 05_graphs/variantgraph.giraffe.gbz -g 05_graphs/A_mapped.gam -o 05_graphs/A_mapped.gam.pack
 ```
+
