@@ -15,7 +15,9 @@ minimap2 -x asm20 -c --eqx ~/workshop_materials/structural_variants/assemblies/r
 
 Let's quickly visualise this alignment. D-genies offers a quick dotplot between two genomes. You can either upload the two fasta files or directly the paf. (Please favour the paf file for today to avoid redudant demands on the server)
 
-What do you think? Do you visualise some rearrangements? Does it fit what you uspected from the PCA analysis?
+What do you think? Do you visualise some rearrangements? Does it fit what you suspected from the PCA analysis?
+
+You can further explore the interactive view of D-Genies. 
 
 ### Ribbon plots and exploration of the assemblies
 Now we may want to do nicer plots. A recent R package will help you do nice ribbon plot. Let's try SVbyEye. https://github.com/daewoooo/SVbyEye
