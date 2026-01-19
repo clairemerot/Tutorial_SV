@@ -1,5 +1,5 @@
 ## 05 - Towards graph-based analysis
-Now we will explore genome graphs and see how they can help us match data to study our SVs.
+Now we will do a first exploration genome graphs (very preliminary!) and see one example about how they can be useful to optimise a combination of different datasets.
 
 ### Build a graph including variants
 Using the programm vg (https://github.com/vgteam/vg), we will construct a simple graph which includes the reference path and variants detected earlier using sniffles and our sample fri59. To limit computational time, we will restrict to a "mini" subset of our genome and vcf (<1Mb long).
