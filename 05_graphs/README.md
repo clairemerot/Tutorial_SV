@@ -18,6 +18,7 @@ prefix=05_graphs/variantgraph
 vg autoindex --workflow giraffe -r $ref -v $vcf_file -p $prefix
 
 ```
+We get some warnings. Why? 
 
 ### Genotype other samples on the graph
 Let's focus on sample A, we will come back to the original paired-end sequences in the fastq files. Those will be mapped directly on the graph using vg giraffe.
