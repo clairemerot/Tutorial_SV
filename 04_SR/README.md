@@ -70,19 +70,19 @@ Like we did for the SVs detected from long-reads we can also open IGV in the des
 
 -> What do you think about our large inversion? Was it detected by Delly? 
 
--> What do you think of the SVs? Is it readable? Is it credible to have so many long SVs?
+-> What do you think of the SVs? Is it readable? 
 
-Let's filter a little our vcf. For example, we may want to focus only on deletions with precise breakpoints and which pass the built-in filters. Then, we come back to the visualisation.
+Let's filter a little our vcf. For example, we may want to focus only on deletions which pass the built-in filters. Then, we come back to the visualisation.
 
 ```
 #filter for only PASS deletions
-bcftools filter -i 'FILTER="PASS" & INFO/PRECISE & INFO/SVTYPE="DEL"' -o 04_SR/B_SVSR_filtered.vcf -Ov 04_SR/B_SVSR.vcf
+bcftools filter -i 'FILTER="PASS" & INFO/SVTYPE="DEL"' -o 04_SR/B_SVSR_DEL.vcf -Ov 04_SR/B_SVSR.vcf
 
 #filter for length - more tricky because it is not directly encoded in the INFO field. let's play with different tools to add it
 
 #we need to add a field for SVLEN
 ##step 1 export position 
-bcftools query -f '%CHROM\t%POS\t%INFO/END\n' 04_SR/B_SVSR.vcf > 04_SR/B_SVSR.vcf.info
+bcftools query -f '%CHROM\t%POS\t%ID\t%INFO/END\n' 04_SR/B_SVSR_DEL.vcf > 04_SR/B_SVSR.vcf.info
 
 #step 2 calculate length
 #I provide here a R script but feel free to write yours
@@ -95,9 +95,7 @@ echo -e '##INFO=<ID=SVLEN,Number=.,Type=Integer,Description="Difference in lengt
 
 ##step4 run bcftools annotate
 #-a is the annotation file (tabix and bgzip, it needs at least CHROM and POS, -h are the header lines to add, -c are the meaning of the column in the annotation file
-bcftools annotate -a 04_SR/B_SVSR.vcf.info.annot.gz -h 04_SR/B_SVSR.vcf.info.annot.hdr -c CHROM,POS,INFO/SVLEN 04_SR/B_SVSR.vcf > 04_SR/B_SVSR_bis.vcf
-
-
+bcftools annotate -a 04_SR/B_SVSR.vcf.info.annot.gz -h 04_SR/B_SVSR.vcf.info.annot.hdr -c CHROM,POS,ID,INFO/END,INFO/SVLEN 04_SR/B_SVSR.vcf > 04_SR/B_SVSR_bis.vcf
 
 #filter vcf -i (include, -O vcf format -o
 bcftools filter -i'INFO/SVLEN<=1000 && INFO/SVLEN>=-1000' -o 04_SR/B_SVSR_bis_1k.vcf -Ov 04_SR/B_SVSR_bis.vcf
@@ -106,7 +104,7 @@ grep -v ^\#\# 04_SR/B_SVSR_bis_1k.vcf | wc -l
 
 ```
 
--> Can you find some SVs well supported by reads ? 
+-> Can you find some deletions well supported by reads ? 
 
 When the vcf for the 4 samples is ready, open also the all_SVSR.vcf. You can now notice 4 columns corresponding to genotypes and other informations about each sample. 
 
