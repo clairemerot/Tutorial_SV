@@ -18,9 +18,13 @@ grep -v ^\#\# 03_LR/fri59.vcf | wc -l
 ```
 
 You can open the vcf and explore it.
+
 -> How many SVs were detected? 
+
 -> What are the different pieces of information available for each variant? 
+
 -> How does it differ from a vcf of SNPs? 
+
 -> What kind of filters or classifications may you want to implement for subsequent analysis?
 
 ### Visualise SVs and validate breakpoints 
@@ -48,7 +52,10 @@ You can click on each variant in the vcf panel to get more information. In the l
 When you click on each read you can get the information about where it maps, whether it is split and map elsewhere, etc. 
 
 You can also zoom on the breakpoints previously identified with the assembly comparison for the very large rearrangement. 
+
 -> What do they look like here? 
+
 -> Are they supported by long-reads? 
+
 -> Which genotype is this individual "fri59"? 
 
