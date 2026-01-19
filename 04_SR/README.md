@@ -111,6 +111,11 @@ When the vcf for the 4 samples is ready, open also the all_SVSR.vcf. You can now
 -> What do you think? Have you noticed missing data?
 -> Can you estimate the fraction of missing data?
 
+To do this we may use a bcftools plug-in which adds the fraction of missing data.
+```
+bcftools +fill-tags -t 'INFO/F_MISSING' 04_SR/all_SVSR.vcf
+```
+
 
 ***TO FIX!***
 WARNING: bcftools version mismatch .. bcftools at 1.21, the plugin "fill-tags" at 1.10.2
@@ -134,7 +139,7 @@ delly call -t ALL \
 ~/workshop_materials/structural_variants/SR/D.bam 
 
 #next lets convert the bcf to vcf
-bcftools view 04_SR/all_SVSR.bcf > 04_SR/all_SVSR_regenotyped.vcf
+bcftools view 04_SR/all_SVSR_regenotyped.bcf > 04_SR/all_SVSR_regenotyped.vcf
 
 echo "nb of SV detected by Delly"
 grep -v ^\#\# 04_SR/all_SVSR_regenotyped.vcf | wc -l
