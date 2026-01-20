@@ -40,7 +40,7 @@ vg call -a -k 05_graphs/A_mapped.gam.pack -r 05_graphs/variantgraph.snarls -f $r
 
 -> How long was it to run?
 
-VG graphs can also be converted to gfa. You may used this gfa to visualise your graph in Bandage - a desktop app. You cna play with the visualisation and try finding a bubble.
+VG graphs can also be converted to gfa. You may use this gfa to visualise your graph in Bandage - a desktop app. You can play with the visualisation and try finding a bubble.
 
 ```
  vg convert -f 05_graphs/variantgraph.giraffe.gbz > 05_graphs/variantgraph.giraffe.gfa
@@ -65,6 +65,6 @@ mkdir 05_graphs/pggb_graph
 pggb -i ~/workshop_materials/structural_variants/assemblies/ref_alt.fasta -o 05_graphs/pggb_graph/
 ```
 
-This run produces a lot of files. Those includes files for visualisation (*.png) which you may open on the desktop.
+This run produces a lot of files. Those include files for visualisation (*.png) which you may open on the desktop.
 
 -> What do you observe on the 2D representation?
