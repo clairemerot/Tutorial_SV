@@ -125,7 +125,9 @@ bcftools view -m2 -M2 -v snps ~/workshop_materials/structural_variants/SNPs/SNPs
 
 #lets load an adequate conda env
 conda activate winpca
-#winpca code
+
+#Then let's run winpca code
+
 #make the PCAs
 #-w for window size -i for increment size --np to remove filters creating an error -v GT to precise the type of data.
 #then there are three argument "$PREFIX" "$VCF" "$REGION"
