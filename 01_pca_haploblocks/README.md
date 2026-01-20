@@ -24,6 +24,13 @@ It outputs a matrix pcs in which each row give the first k eigenvalues and k eig
 
 #### analysis
 You will run the end of lostruct procedure. you can do it either on the terminal or in Rstudio on your computer
+
+If you have not run the preparatory steps, please copy the pca_matrix already prepared to your own directory.
+
+```
+cp ~/workshop_materials/structural_variants/SNPs/pca_matrix.txt 01_pca_haploblocks/pca_matrix.txt
+```
+
 ```
 library(lostruct)
 #load matrix
