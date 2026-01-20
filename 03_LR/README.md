@@ -41,7 +41,7 @@ Here are the paths for the genome and bam (in our data dungeon):
 /workshop_materials/structural_variants/assemblies/ref.fasta,
 /workshop_materials/structural_variants/SR/A.bam
 
-As you may notice in the vcf track we have a lot of long SVs which are most likely wrong. Some have the label "PASS" in the vcf while others have the label "GT" and a genotype 0/0 meaning they have much less upport and are likely wrong.
+As you may notice in the vcf track we have a lot of long SVs which are most likely wrong. Some have the label "PASS" in the vcf while others have the label "GT" and a genotype 0/0 meaning they have much less support and are likely wrong.
 
 In IGV, we can hide the ones that do not pass filters (in light blue) directly in the interface. Alternatively, you can filter them on the server with bcftools.
 
