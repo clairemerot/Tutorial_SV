@@ -14,7 +14,7 @@ Local PCA Shows How the Effect of Population Structure Differs Along the Genome,
 
 If you want to run yourself all the initial steps to go from the vcf of SNPs to the matrix of PCA-by-windows, you can follow the detailled tutorial [here](https://github.com/clairemerot/Tutorial_SV/blob/main/01_pca_haploblocks/preprocess.md). If you are short in time, I recommend that you use the pcamatrix that I made for you. In a terminal, you can have a look at the matrix with
 ```
-less ~/workshop_materials/structural_variants/SNPs/pca_matrix.txt
+less -S ~/workshop_materials/structural_variants/SNPs/pca_matrix.txt
 ```
 (use "q" to exit less visualisation in a terminal)
 
