@@ -66,7 +66,9 @@ Open the vcf (for exemple with ```less 04_SR/B_SVSR.vcf```) in a different termi
 
 -> What do you think about the information about SVs? What differs and does not differ with the vcf produced by Sniffles?
 
-Like we did for the SVs detected from long-reads we can also open IGV in the desktop and upload the new vcf(s) and the B.bam (or the 4 bams). You can walk along the genome to evaluate visually how the reads seem to support (or not) some SVs.
+Like we did for the SVs detected from long-reads we can also open IGV in the desktop and upload the new vcf (04_SR/B_SVSR.vcf) and the B.bam (or the 4 bams). You can walk along the genome to evaluate visually how the reads seem to support (or not) some SVs.
+Reference is here ~/workshop_materials/structural_variants/assemblies/ref.fasta
+Bam is here ~/workshop_materials/structural_variants/SR/B.bam
 
 -> What do you think about our large inversion? Was it detected by Delly? 
 
