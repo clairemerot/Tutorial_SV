@@ -13,7 +13,7 @@ Like for section 1, I have trimmed the fastq files, mapped fastq1/fastq2 in pair
 
 ### Calling SV with Delly
 Let's run Delly on one sample first (sample B). We will use the following options -t to choose the type of SVs (here all)
--o the output file -g the reference genome -q 20 to keep alignement above a minimum quality of 20
+-o the output file -g the reference genome -q 20 to keep alignement above a minimum quality of 20. This may take up to 10 min. Feel free to take a break :-) 
 
 ```
 output=04_SR/B_SVSR.bcf
