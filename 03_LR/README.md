@@ -39,7 +39,7 @@ You can upload the genome, then you can upload your vcf produced with sniffles (
 
 Here are the paths for the genome and bam (in our data dungeon):
 /workshop_materials/structural_variants/assemblies/ref.fasta,
-/workshop_materials/structural_variants/SR/A.bam
+/workshop_materials/structural_variants/ONT/fri59.bam
 
 As you may notice in the vcf track we have a lot of long SVs which are most likely wrong. Some have the label "PASS" in the vcf while others have the label "GT" and a genotype 0/0 meaning they have much less support and are likely wrong.
 
