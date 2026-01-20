@@ -68,7 +68,7 @@ ggplot(mds_matrix, aes(x=mds1, y=mds2, colour=chrom))+
   geom_point()+
   theme_classic()
 ```
-A group of windows seems to cluster at high values on mds1. Let's see whether those windows are alos in the same area of our genome by plotting the mds1 scores along the chromosome:
+A group of windows seems to cluster at high values on mds1. Let's see whether those windows are also in the same area of our genome by plotting the mds1 scores along the chromosome:
 
 ```
 ggplot(mds_matrix, aes(x=midpos, y=mds1, colour=chrom))+
@@ -109,7 +109,7 @@ plot(pc1_i, pc2_i, pch=20, xlab=paste("PC1", var1 , "%"), ylab=paste("PC2", var2
 ```
 You may try to visualise a PCA within and outside your region of interest. What do you think?
 
-In the folder 00_ressources you will find a file classifying the samples as AA, AB and BB. Those could be imagined as populations or groups with different versions of a rearrangements. I extracted this information from a PCA in our region of interest and confirmed it with a PCR marker. Does it correspond to the groups you observe?
+In the folder 00_ressources you will find a file classifying the samples as AA, AB and BB (info_ind.txt). Those could be imagined as populations or groups with different versions of a rearrangements. I extracted this information from a PCA in our region of interest and confirmed it with a PCR marker. Does it correspond to the groups you observe?
 
 ### WinPCA - visualising PC1 along the genome.
 
