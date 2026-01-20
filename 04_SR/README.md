@@ -108,11 +108,7 @@ grep -v ^\#\# 04_SR/B_SVSR_bis_1k.vcf | wc -l
 
 When the vcf for the 4 samples is ready, open also the all_SVSR.vcf. You can now notice 4 columns corresponding to genotypes and other informations about each sample. 
 
--> What do you think? Have you noticed missing data?
-
--> Can you estimate the fraction of missing data?
-
-To do this we may use a bcftools plug-in which adds the fraction of missing data. Let's also add the frequency of the alternative allele (MAF) and export it.
+We can also be interested in assessing the fraction of missing data and the frequency of alternative alleles. To do this we may use a bcftools plug-in which adds the fraction of missing data. Let's also add the frequency of the alternative allele (MAF) and export it.
 
 ```
 #using the plug in to add infor in the vcf
@@ -125,12 +121,12 @@ bcftools query -f '%CHROM\t%POS\t%ID\t%INFO/END\t%INFO/F_MISSING\t%INFO/MAF\n' 0
 
 Open the info file to more easily visualize our new stats.
 
--> What do you think of allelic frequency? 
+-> What do you think of allelic frequency? And missing data?
 
 If you have time you can try to implement new filters to better restrict your set of SVs.
 
 ### Re-genotyping
-Delly can also be used to re-genotype all the samples wiht the objective to obtain the most accurate genotype for all samples and for all SVs. For example, one can imagine that a given SV was only called in two samples with high-confidence (maybe because they are alternate homozygotes)... Now by regenotyping, we can ask what is the genotype in the other two samples for which it wasn't called (for exemple due to a lower coverage if it was heterozygote or less deeply sequenced).
+Delly can also be used to re-genotype all the samples wihht the objective to obtain the most accurate genotypes for all samples and for all SVs. 
 
 The command is nearly identical, except that we give the vcf, with -v.
 
@@ -153,13 +149,14 @@ echo "nb of SV detected by Delly"
 grep -v ^\#\# 04_SR/all_SVSR_regenotyped.vcf | wc -l
 ```
 
--> How many SVs are you analysing in total?
+-> How many SVs are you analysing in total? Same?
 
--> Do you notice less mising data? 
+-> Do you notice differences with the earlier vcf?
 
--> Do you notice some variants in which the genotype is different?
+We could expect to have less missing data and more accurate genotype. For example, one can imagine that a given SV was only called in two samples with high-confidence (maybe because they are alternate homozygotes)... Now by regenotyping, we can ask what is the genotype in the other two samples for which it wasn't called (for exemple due to a lower coverage if it was heterozygote or less deeply sequenced). 
 
-(tip: you can re-run our plug-in to add missing fraction & maf, and then compare the files with your favorite method)
+The re-genotyping step also refines the breakpoints, and unfortunately re-name the ID of each SVs. While the refinment is an interesting step, the re-ordering of SVs makes it difficult to easily track what happen to a specific SV.
+
 
 
 
