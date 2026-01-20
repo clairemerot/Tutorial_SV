@@ -76,7 +76,7 @@ Let's filter a little our vcf. For example, we may want to focus only on deletio
 
 ```
 #filter for only PASS deletions
-bcftools filter -i 'FILTER="PASS" & INFO/SVTYPE="DEL"' -o 04_SR/B_SVSR_DEL.vcf -Ov 04_SR/B_SVSR.vcf
+bcftools filter -i 'FILTER="PASS" && INFO/SVTYPE="DEL"' -o 04_SR/B_SVSR_DEL.vcf -Ov 04_SR/B_SVSR.vcf
 
 #filter for length - more tricky because it is not directly encoded in the INFO field. let's play with different tools to add it
 
