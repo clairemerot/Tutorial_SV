@@ -3,10 +3,16 @@ This is half-a-day training about SV detection using diverse sets of data.
 We will use a dataset provided by my collaborators and myself (C. Mérot) including short-reads, long-reads and assemblies of the seaweed fly _Coelopa frigida_. This species is interesting for its large polymorphic inversions.
 To ensure efficient computational time, we will work on a dummy genome  of 10Mb. I also made dummy labels for the samples to simplify the dataset. 
 
-To make our lives easier, I suggest that you clone this whole repository in your working directory so taht we all use the same file/folder architecture. 
-Very important ** all commands are written to be run from the Tutorial_SV folder (and not from each subfolder)**. 
+To make our lives easier, I suggest that you clone this whole repository in your working directory:
 
 ```git clone https://github.com/clairemerot/Tutorial_SV ```
+
+We will all use the same file/folder architecture. Please open this new folder:
+
+```cd Tutorial SV```
+
+Now: VERY IMPORTANT ** all commands are written to be run from the Tutorial_SV folder (and not from each subfolder)**. 
+
 
 ## 01 - Using SNPs & local PCA to detect haploblocks putatively representing large rearrangements
 Using 22 flies sequenced with short-reads, I called SNPs (stored in a vcf file). Using this dataset we will perform local PCAs along the genome (cutting the genome in small window on which we decompose genetic variation into principal compenents). We are looking for regions with unexpected population structure. Typically, non-recombining haploblocks, like chromosomal inversions or other regions, will display three clusters (homozygote for one arrangement/one haplotypic block, heterozygotes and homozygote for the other arrangement). If we find such a region (spoiler alert... yes!), we will explore it more deeply with this dataset and others. 
