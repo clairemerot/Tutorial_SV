@@ -10,7 +10,10 @@ To compare those assemblies we need to align them to each other. For this we wil
 This file can be opened with a regular text editor to see what it looks like.  
 
 ```
-minimap2 -x asm20 -c --eqx ~/workshop_materials/structural_variants/assemblies/ref.fasta ~/workshop_materials/structural_variants/assemblies/alt.fasta > 02_assemblies/alt-to-ref20.paf
+ref=~/workshop_materials/structural_variants/assemblies/ref.fasta
+alt=~/workshop_materials/structural_variants/assemblies/alt.fasta
+paf_output=02_assemblies/alt-to-ref20.paf
+minimap2 -x asm20 -c --eqx $ref $alt > $paf_output
 ```
 
 Let's quickly visualise this alignment. D-genies offers a quick dotplot between two genomes. You can either upload the two fasta files or directly the paf. (Please favour the paf file for today to avoid redudant demands on the server)
