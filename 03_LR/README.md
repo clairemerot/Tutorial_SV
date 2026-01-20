@@ -35,7 +35,11 @@ I suggest to use IGV which may be heavy to use on a large chromosome but will be
 
 Please go on the desktop and start IGV.
 
-You can upload the genome (ref.fasta), then you can upload your vcf produced with sniffles, and then your bam file. You can try playing with the zoom to visualise the SVs and the read support.
+You can upload the genome, then you can upload your vcf produced with sniffles (it should be in ```Tutorial_SV/03_LR/fri59.vcf```), and then the bam file. You can try playing with the zoom to visualise the SVs and the read support.
+
+Here are the paths for the genome and bam (in our data dungeon):
+/workshop_materials/structural_variants/assemblies/ref.fasta,
+/workshop_materials/structural_variants/SR/A.bam
 
 As you may notice in the vcf track we have a lot of long SVs which are most likely wrong. Some have the label "PASS" in the vcf while others have the label "GT" and a genotype 0/0 meaning they have much less upport and are likely wrong.
 
