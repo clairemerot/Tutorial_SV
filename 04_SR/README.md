@@ -123,7 +123,11 @@ bcftools query -f '%CHROM\t%POS\t%ID\t%INFO/END\t%INFO/F_MISSING\t%INFO/MAF\n' 0
 
 ```
 
+Open the info file to more easily visualize our new stats.
 
+-> What do you think of allelic frequency? 
+
+If you have time you can try to implement new filters to better restrict your set of SVs.
 
 ### Re-genotyping
 Delly can also be used to re-genotype all the samples wiht the objective to obtain the most accurate genotype for all samples and for all SVs. For example, one can imagine that a given SV was only called in two samples with high-confidence (maybe because they are alternate homozygotes)... Now by regenotyping, we can ask what is the genotype in the other two samples for which it wasn't called (for exemple due to a lower coverage if it was heterozygote or less deeply sequenced).
@@ -154,6 +158,8 @@ grep -v ^\#\# 04_SR/all_SVSR_regenotyped.vcf | wc -l
 -> Do you notice less mising data? 
 
 -> Do you notice some variants in which the genotype is different?
+
+(tip: you can re-run our plug-in to add missing fraction & maf, and then compare the files with your favorite method)
 
 
 
