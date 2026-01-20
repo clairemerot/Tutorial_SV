@@ -5,7 +5,7 @@ First you need to  convert the vcf into a bcf, sort it and index it.
 The package lostruct can also take a vcf but it is heavy to load the whole file. Instead they made function that is able to cut the vcf window by window to avoid overloading the memory (but this requires a sorted, indexed bcf)
 ```
 #we need to sort the vcf
-(grep ^"#"  ~/workshop_materials/structural_variants/SNPs/SNPs.vcf; grep -v ^"#" SNPs.vcf | sort -k1,1 -k2,2n) > 01_pca_haploblocks/SNPs_sorted.vcf
+(grep ^"#"  ~/workshop_materials/structural_variants/SNPs/SNPs.vcf; grep -v ^"#"  ~/workshop_materials/structural_variants/SNPs/SNPs.vcf | sort -k1,1 -k2,2n) > 01_pca_haploblocks/SNPs_sorted.vcf
 
 #then compress it and index it
 bgzip -c 01_pca_haploblocks/SNPs_sorted.vcf > 01_pca_haploblocks/SNPs_sorted.vcf.gz
