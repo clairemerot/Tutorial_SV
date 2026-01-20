@@ -109,17 +109,21 @@ grep -v ^\#\# 04_SR/B_SVSR_bis_1k.vcf | wc -l
 When the vcf for the 4 samples is ready, open also the all_SVSR.vcf. You can now notice 4 columns corresponding to genotypes and other informations about each sample. 
 
 -> What do you think? Have you noticed missing data?
+
 -> Can you estimate the fraction of missing data?
 
-To do this we may use a bcftools plug-in which adds the fraction of missing data.
+To do this we may use a bcftools plug-in which adds the fraction of missing data. Let's also add the frequency of the alternative allele (MAF) and export it.
+
 ```
-bcftools +fill-tags -t 'INFO/F_MISSING' 04_SR/all_SVSR.vcf
+#using the plug in to add infor in the vcf
+bcftools +fill-tags 04_SR/all_SVSR.vcf -- -t 'INFO/F_MISSING','INFO/MAF' > 04_SR/all_SVSR_missingMAF.vcf
+
+#exporting
+bcftools query -f '%CHROM\t%POS\t%ID\t%INFO/END\t%INFO/F_MISSING\t%INFO/MAF\n' 04_SR/all_SVSR_missingMAF.vcf > 04_SR/all_SVSR_missingMAF.info
+
 ```
 
 
-***TO FIX!***
-WARNING: bcftools version mismatch .. bcftools at 1.21, the plugin "fill-tags" at 1.10.2
-g
 
 ### Re-genotyping
 Delly can also be used to re-genotype all the samples wiht the objective to obtain the most accurate genotype for all samples and for all SVs. For example, one can imagine that a given SV was only called in two samples with high-confidence (maybe because they are alternate homozygotes)... Now by regenotyping, we can ask what is the genotype in the other two samples for which it wasn't called (for exemple due to a lower coverage if it was heterozygote or less deeply sequenced).
