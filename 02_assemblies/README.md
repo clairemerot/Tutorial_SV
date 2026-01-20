@@ -16,7 +16,9 @@ paf_output=02_assemblies/alt-to-ref20.paf
 minimap2 -x asm20 -c --eqx $ref $alt > $paf_output
 ```
 
-Let's quickly visualise this alignment. D-genies offers a quick dotplot between two genomes. You can either upload the two fasta files or directly the paf. (Please favour the paf file for today to avoid redudant demands on the server)
+Let's quickly visualise this alignment. D-genies offers a quick dotplot between two genomes. You can either upload the two fasta files or directly the paf. 
+
+Please favour the paf file for today to avoid redudant demands on the server. You need to go in the second tab "plot alignment", then upload your paf file in "Alignement file", the ref.fasta in the "Target file" and the alt.fasta in the "Query file". The paf file is inside your Tutorial_SV/02_assemblies while the fasta are in our data dungeon "~/workshop_materials/structural_variants/assemblies/"
 
 What do you think? Do you visualise some rearrangements? Does it fit what you suspected from the PCA analysis?
 
