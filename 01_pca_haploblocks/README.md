@@ -23,13 +23,14 @@ Briefly, we do several steps to convert into a bcf. Then we use a function in lo
 It outputs a matrix pcs in which each row give the first k eigenvalues and k eigenvectors for each window. This gives you a matrix with 47 columns (3 columns of info, 22 columns with PC1 score for each individual, and 22 column with PC2 score for each individual). It has as many rows as windows. I added 3 columns of information about the window position. 
 
 #### analysis
-You will run the end of lostruct procedure. you can do it either on the terminal or in Rstudio on your computer
-
-If you have not run the preparatory steps, please copy the pca_matrix already prepared to your own directory.
+If you have not run the preparatory steps, please copy the pca_matrix already prepared to your own directory (run this in the terminal).
 
 ```
 cp ~/workshop_materials/structural_variants/SNPs/pca_matrix.txt 01_pca_haploblocks/pca_matrix.txt
 ```
+
+Now, in R, we will run the end of lostruct procedure. you can do it either on the terminal or in Rstudio on your computer
+(if using R studio, please set your working directory to Tutorial_SV)
 
 ```
 library(lostruct)
