@@ -123,6 +123,8 @@ To run winpca in the terminal
 #filter for biallelic SNPs - otherwise we run into an error:
 bcftools view -m2 -M2 -v snps ~/workshop_materials/structural_variants/SNPs/SNPs.vcf > 01_pca_haploblocks/SNPs_biallelic.vcf
 
+#lets load an adequate conda env
+conda activate winpca
 #winpca code
 #make the PCAs
 #-w for window size -i for increment size --np to remove filters creating an error -v GT to precise the type of data.
@@ -130,10 +132,13 @@ bcftools view -m2 -M2 -v snps ~/workshop_materials/structural_variants/SNPs/SNPs
 winpca pca -w 10000 -i 10000 --np -v GT 01_pca_haploblocks/winpca_out 01_pca_haploblocks/SNPs_biallelic.vcf Chr1:1-9999999
 
 #polarize them
-winpca polarize winpca_out
+winpca polarize 01_pca_haploblocks/winpca_out
 
 #plot PCs
-winpca chromplot winpca_out Chr1:1-9999999
+winpca chromplot 01_pca_haploblocks/winpca_out Chr1:1-9999999
+
+#get out of the env
+conda deactivate
 ```
 Winpca outputs a .html file in which you can directly visualise PC1 along the chromosome (below) and the proportion of variance capture by pc1.
 
